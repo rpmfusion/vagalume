@@ -1,6 +1,6 @@
 Name:           vagalume
-Version:        0.6
-Release:        4%{?dist}
+Version:        0.7
+Release:        1%{?dist}
 Summary:        Last.fm client for GNOME and Maemo
 
 Group:          Applications/Multimedia
@@ -80,8 +80,9 @@ fi
 %files -f %{name}.lang
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING NEWS README
-%{_bindir}/vagalume
+%{_bindir}/vagalume*
 %{_datadir}/applications/*.desktop
+%{_datadir}/dbus-1/services/vagalume.service
 %{_datadir}/icons/hicolor/*/apps/vagalume.png
 %{_datadir}/pixmaps/vagalume.*
 %{_datadir}/vagalume
@@ -89,23 +90,26 @@ fi
 
 
 %changelog
-* Sun Aug 03 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info - 0.6-4
+* Mon Sep  1 2008 Michel Salim <michel.sylvan@gmail.com> - 0.7-1
+- Update to 0.7
+
+* Sun Aug 03 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 0.6-4
 - rebuild
 
-* Sat May 24 2008 Michel Salim <salimma@fedoraproject.org> - 0.6-3.1
+* Sat May 24 2008 Michel Salim <michel.sylvan@gmail.com> - 0.6-3.1
 - BR on curl-devel for Fedora < 9, instead of libcurl-devel
 
-* Fri May 23 2008 Michel Salim <salimma@fedoraproject.org> - 0.6-3
+* Fri May 23 2008 Michel Salim <michel.sylvan@gmail.com> - 0.6-3
 - Update icon cache after (un)installation
 
-* Mon May 19 2008 Michel Salim <salimma@fedoraproject.org> - 0.6-2
+* Mon May 19 2008 Michel Salim <michel.sylvan@gmail.com> - 0.6-2
 - Add BR on gettext
 
-* Sun May 18 2008 Michel Salim <salimma@fedoraproject.org> - 0.6-1
+* Sun May 18 2008 Michel Salim <michel.sylvan@gmail.com> - 0.6-1
 - Update to 0.6
 
-* Fri May  2 2008 Michel Salim <salimma@fedoraproject.org> - 0.5.1-1
+* Fri May  2 2008 Michel Salim <michel.sylvan@gmail.com> - 0.5.1-1
 - Update to 0.5.1
 
-* Wed Nov 14 2007 Michel Salim <salimma@fedoraproject.org> - 0.2-1
+* Wed Nov 14 2007 Michel Salim <michel.sylvan@gmail.com> - 0.2-1
 - Initial package
