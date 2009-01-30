@@ -1,6 +1,6 @@
 Name:           vagalume
 Version:        0.7
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Last.fm client for GNOME and Maemo
 
 Group:          Applications/Multimedia
@@ -20,6 +20,7 @@ BuildRequires:  curl-devel
 BuildRequires:  libnotify-devel dbus-glib-devel
 BuildRequires:  desktop-file-utils gettext
 Requires:       hicolor-icon-theme
+Requires:       gstreamer-plugins-ugly
 
 %description
 Vagalume is a Last.fm client based on Gnome, and specially designed to
@@ -90,6 +91,9 @@ fi
 
 
 %changelog
+* Fri Jan 30 2009 Michel Salim <michel.sylvan@gmail.com> - 0.7-2
+- Require gstreamer-plugins-ugly (bz #347)
+
 * Mon Sep  1 2008 Michel Salim <michel.sylvan@gmail.com> - 0.7-1
 - Update to 0.7
 
