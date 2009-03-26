@@ -1,12 +1,12 @@
 Name:           vagalume
-Version:        0.7
-Release:        2%{?dist}
+Version:        0.7.1
+Release:        1%{?dist}
 Summary:        Last.fm client for GNOME and Maemo
 
 Group:          Applications/Multimedia
 License:        GPLv3
 URL:            http://vagalume.igalia.com/
-Source0:        http://people.igalia.com/berto/files/vagalume/source/vagalume_%{version}.orig.tar.gz
+Source0:        http://vagalume.igalia.com/files/source/vagalume_%{version}.orig.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  gstreamer-devel gtk2-devel libxml2-devel
@@ -91,6 +91,9 @@ fi
 
 
 %changelog
+* Tue Mar 24 2009 Michel Salim <salimma@fedoraproject.org> - 0.7.1-1
+- Update to 0.7.1
+
 * Fri Jan 30 2009 Michel Salim <michel.sylvan@gmail.com> - 0.7-2
 - Require gstreamer-plugins-ugly (bz #347)
 
