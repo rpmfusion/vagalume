@@ -1,13 +1,15 @@
 Name:           vagalume
 Version:        0.7.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Last.fm client for GNOME and Maemo
 
 Group:          Applications/Multimedia
 License:        GPLv3
 URL:            http://vagalume.igalia.com/
 Source0:        http://vagalume.igalia.com/files/source/vagalume_%{version}.orig.tar.gz
+# remove patch0 when 0.7.2 is released
 Patch0:         %{name}-0.7.1-border_width.patch
+Patch1:         %{name}-0.7.1-others.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  gstreamer-devel gtk2-devel libxml2-devel
@@ -47,6 +49,7 @@ Vagalume has the following features:
 %prep
 %setup -q -n %{name}-%{version}.orig
 %patch0 -p1 -b .border_width
+%patch1 -p1 -b .others
 
 
 %build
@@ -93,6 +96,9 @@ fi
 
 
 %changelog
+* Wed May 13 2009 Michel Salim <salimma@fedoraproject.org> - 0.7.1-3
+- Enable playback of others' recommendations and tags (upstream bug #4072)
+
 * Tue May  5 2009 Michel Salim <salimma@fedoraproject.org> - 0.7.1-2
 - Fix border width (upstream bug #4041)
 
