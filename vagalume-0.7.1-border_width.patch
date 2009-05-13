@@ -1,6 +1,6 @@
---- trunk/src/vgl-main-window.c	2009/04/29 22:47:55	527
-+++ trunk/src/vgl-main-window.c	2009/05/01 12:44:11	528
-@@ -1036,12 +1036,13 @@
+--- vagalume-0.7.1.orig/src/vgl-main-window.c.border_width	2009-02-26 09:12:11.000000000 -0500
++++ vagalume-0.7.1.orig/src/vgl-main-window.c	2009-05-05 20:02:01.339619300 -0400
+@@ -1016,13 +1016,14 @@
          priv->progressbar_text = g_string_sized_new(30);
          g_string_assign(priv->progressbar_text, " ");
          /* Window */
@@ -8,6 +8,7 @@
 +#ifdef USE_HILDON_WINDOW
 +        gtk_container_set_border_width(GTK_CONTAINER(win), 2);
 +#else
+         win->type = GTK_WINDOW_TOPLEVEL;
          gtk_window_set_default_size(win, 500, -1);
  #endif
          gtk_window_add_accel_group(win, accel);
