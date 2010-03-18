@@ -1,6 +1,6 @@
 Name:           vagalume
-Version:        0.7.1
-Release:        3%{?dist}
+Version:        0.8.3
+Release:        1%{?dist}
 Summary:        Last.fm client for GNOME and Maemo
 
 Group:          Applications/Multimedia
@@ -8,8 +8,8 @@ License:        GPLv3
 URL:            http://vagalume.igalia.com/
 Source0:        http://vagalume.igalia.com/files/source/vagalume_%{version}.orig.tar.gz
 # remove patch0 when 0.7.2 is released
-Patch0:         %{name}-0.7.1-border_width.patch
-Patch1:         %{name}-0.7.1-others.patch
+# Patch0:         %{name}-0.7.1-border_width.patch
+# Patch1:         %{name}-0.7.1-others.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  gstreamer-devel gtk2-devel libxml2-devel
@@ -26,30 +26,35 @@ Requires:       hicolor-icon-theme
 Requires:       gstreamer-plugins-ugly
 
 %description
-Vagalume is a Last.fm client based on Gnome, and specially designed to
-work in the Maemo platform.
+Vagalume is a GTK+-based Last.fm client. Although it works on standard
+PCs, it is specially designed to work in the Maemo platform, the one
+used by some Nokia devices such as the 770, N800, N810 and N900.
 
-Vagalume has the following features:
+Its main features are:
 
-   * It plays Last.fm streams using the Last.fm protocol v1.2
-   * It can play any Last.fm radio: personal, neighbours, loved
-     tracks, or any other arbitrary URL.
-   * It can download free tracks
-   * It implements the Audioscrobbler Realtime Submission Protocol
-     v1.2, specifically:
-      * Now Playing information
-      * Scrobbling of tracks that you listen
-      * Love/Ban ratings
-   * It displays the album cover of the track being played
-   * The user can tag artists, tracks and albums
-   * The user can send recommendations to other users
-   * The user can add tracks to their playlist
+    * It plays Last.fm radio streams (using the v2.0 API)
+    * It supports Libre.fm and other compatible servers
+    * Support for different radio stations (personal, neighbours, loved tracks,
+       ..., or any lastfm:// URL)
+    * It supports marking tracks as loved or banned
+    * It can tag artists, tracks and albums
+    * It can send recommendations to other users
+    * It can add tracks to your playlist
+    * It can download free tracks to your hard disk
+    * It scrobbles tracks so they appear in your Last.fm webpage
+      (this can be disabled at runtime).
+    * It sends Now Playing information following the Audioscrobbler
+      Realtime Submission Protocol v1.2.
+    * Supports discovery mode
+    * Bookmarks
+    * Remote control
+    * Gettext support (translated into many languages)
 
 
 %prep
 %setup -q -n %{name}-%{version}.orig
-%patch0 -p1 -b .border_width
-%patch1 -p1 -b .others
+#patch0 -p1 -b .border_width
+#patch1 -p1 -b .others
 
 
 %build
@@ -96,6 +101,9 @@ fi
 
 
 %changelog
+* Thu Mar 18 2010 Michel Salim <salimma@fedoraproject.org> - 0.8.3-1
+- Update to 0.8.3
+
 * Wed May 13 2009 Michel Salim <salimma@fedoraproject.org> - 0.7.1-3
 - Enable playback of others' recommendations and tags (upstream bug #4072)
 
