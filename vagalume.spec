@@ -12,7 +12,7 @@ Source0:        http://vagalume.igalia.com/files/source/vagalume_%{version}.orig
 # Patch1:         %{name}-0.7.1-others.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:  gstreamer-devel gtk2-devel libxml2-devel
+BuildRequires:  gstreamer-devel gtk2-devel libxml2-devel intltool
 # curl has been renamed in F-9. New package still provides curl[-devel] but
 # better be safe
 %if 0%{?fedora} >= 9
