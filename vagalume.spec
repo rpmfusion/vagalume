@@ -1,6 +1,6 @@
 Name:           vagalume
 Version:        0.8.3
-Release:        1%{?dist}
+Release:        1%{?dist}.1
 Summary:        Last.fm client for GNOME and Maemo
 
 Group:          Applications/Multimedia
