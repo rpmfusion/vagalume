@@ -1,6 +1,6 @@
 Name:           vagalume
 Version:        0.8.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Last.fm client for GNOME and Maemo
 
 Group:          Applications/Multimedia
@@ -95,12 +95,17 @@ fi
 %{_datadir}/applications/*.desktop
 %{_datadir}/dbus-1/services/vagalume.service
 %{_datadir}/icons/hicolor/*/apps/vagalume.png
-%{_datadir}/pixmaps/vagalume.*
+# upstream notified, file hopefully removed in next release
+# https://garage.maemo.org/tracker/index.php?func=detail&aid=5465&group_id=447&atid=1709
+%exclude %{_datadir}/pixmaps/vagalume.*
 %{_datadir}/vagalume
 %{_mandir}/man*/*
 
 
 %changelog
+* Sat Mar 27 2010 Michel Salim <salimma@fedoraproject.org> - 0.8.3-2
+- Exclude old .xpm icon
+
 * Thu Mar 18 2010 Michel Salim <salimma@fedoraproject.org> - 0.8.3-1
 - Update to 0.8.3
 
