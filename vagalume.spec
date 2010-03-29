@@ -1,15 +1,12 @@
 Name:           vagalume
 Version:        0.8.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Last.fm client for GNOME and Maemo
 
 Group:          Applications/Multimedia
 License:        GPLv3
 URL:            http://vagalume.igalia.com/
 Source0:        http://vagalume.igalia.com/files/source/vagalume_%{version}.orig.tar.gz
-# remove patch0 when 0.7.2 is released
-# Patch0:         %{name}-0.7.1-border_width.patch
-# Patch1:         %{name}-0.7.1-others.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  gstreamer-devel gtk2-devel libxml2-devel intltool
@@ -75,16 +72,16 @@ desktop-file-install --vendor="fedora" \
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post 
+%post
 touch --no-create %{_datadir}/icons/hicolor
 if [ -x %{_bindir}/gtk-update-icon-cache ]; then
-  %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
+   %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
 fi
 
-%postun 
+%postun
 touch --no-create %{_datadir}/icons/hicolor
 if [ -x %{_bindir}/gtk-update-icon-cache ]; then
-  %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
+   %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
 fi
 
 
@@ -95,14 +92,15 @@ fi
 %{_datadir}/applications/*.desktop
 %{_datadir}/dbus-1/services/vagalume.service
 %{_datadir}/icons/hicolor/*/apps/vagalume.png
-# upstream notified, file hopefully removed in next release
-# https://garage.maemo.org/tracker/index.php?func=detail&aid=5465&group_id=447&atid=1709
-%exclude %{_datadir}/pixmaps/vagalume.*
+%{_datadir}/pixmaps/vagalume.*
 %{_datadir}/vagalume
 %{_mandir}/man*/*
 
 
 %changelog
+* Mon Mar 29 2010 Michel Salim <salimma@fedoraproject.org> - 0.8.3-3
+- Restore .xpm icon
+
 * Sat Mar 27 2010 Michel Salim <salimma@fedoraproject.org> - 0.8.3-2
 - Exclude old .xpm icon
 
