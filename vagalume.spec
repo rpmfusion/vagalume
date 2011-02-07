@@ -1,12 +1,12 @@
 Name:           vagalume
-Version:        0.8.3
-Release:        3%{?dist}
+Version:        0.8.4
+Release:        1%{?dist}
 Summary:        Last.fm client for GNOME and Maemo
 
 Group:          Applications/Multimedia
 License:        GPLv3
 URL:            http://vagalume.igalia.com/
-Source0:        http://vagalume.igalia.com/files/source/vagalume_%{version}.orig.tar.gz
+Source0:        http://vagalume.igalia.com/files/source/vagalume-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  gstreamer-devel gtk2-devel libxml2-devel intltool
@@ -49,13 +49,16 @@ Its main features are:
 
 
 %prep
-%setup -q -n %{name}-%{version}.orig
-#patch0 -p1 -b .border_width
-#patch1 -p1 -b .others
+%setup -q
 
 
 %build
+%if 0%{?fedora} >= 15
+# No support for new libnotify yet
+%configure --disable-tray-icon
+%else
 %configure
+%endif
 make %{?_smp_mflags}
 
 
@@ -98,6 +101,12 @@ fi
 
 
 %changelog
+* Mon Feb  7 2011 Michel Salim <salimma@fedoraproject.org> - 0.8.4-1
+- Update to 0.8.4
+
+* Thu Oct 14 2010 Nicolas Chauvet <kwizart@gmail.com> - 0.8.3-4
+- Rebuilt for gcc bug
+
 * Mon Mar 29 2010 Michel Salim <salimma@fedoraproject.org> - 0.8.3-3
 - Restore .xpm icon
 
