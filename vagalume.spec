@@ -53,7 +53,12 @@ Its main features are:
 
 
 %build
+%if 0%{?fedora} >= 15
+# No support for new libnotify yet
+%configure --disable-tray-icon
+%else
 %configure
+%endif
 make %{?_smp_mflags}
 
 
