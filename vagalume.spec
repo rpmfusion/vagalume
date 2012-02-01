@@ -1,5 +1,5 @@
 Name:           vagalume
-Version:        0.8.4
+Version:        0.8.5
 Release:        1%{?dist}
 Summary:        Last.fm client for GNOME and Maemo
 
@@ -101,6 +101,9 @@ fi
 
 
 %changelog
+* Wed Feb  1 2012 Michel Salim <salimma@fedoraproject.org> - 0.8.5-1
+- Update to 0.8.5
+
 * Mon Feb  7 2011 Michel Salim <salimma@fedoraproject.org> - 0.8.4-1
 - Update to 0.8.4
 
