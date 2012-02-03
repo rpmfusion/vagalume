@@ -1,6 +1,6 @@
 Name:           vagalume
 Version:        0.8.5
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Last.fm client for GNOME and Maemo
 
 Group:          Applications/Multimedia
@@ -77,12 +77,14 @@ touch --no-create %{_datadir}/icons/hicolor
 if [ -x %{_bindir}/gtk-update-icon-cache ]; then
    %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
 fi
+/usr/bin/update-desktop-database &> /dev/null || :
 
 %postun
 touch --no-create %{_datadir}/icons/hicolor
 if [ -x %{_bindir}/gtk-update-icon-cache ]; then
    %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
 fi
+/usr/bin/update-desktop-database &> /dev/null || :
 
 
 %files -f %{name}.lang
@@ -98,6 +100,9 @@ fi
 
 
 %changelog
+* Fri Feb  3 2012 Michel Salim <salimma@fedoraproject.org> - 0.8.5-3
+- Update desktop database to (de-)register lastfm:// handler
+
 * Fri Feb  3 2012 Michel Salim <salimma@fedoraproject.org> - 0.8.5-2
 - Switch to building against GTK+ 3.0
 - Enable mixer, notifications, and proxy support
