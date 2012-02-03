@@ -1,26 +1,27 @@
 Name:           vagalume
 Version:        0.8.5
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Last.fm client for GNOME and Maemo
 
 Group:          Applications/Multimedia
 License:        GPLv3
 URL:            http://vagalume.igalia.com/
 Source0:        http://vagalume.igalia.com/files/source/vagalume-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source1:        vagalumectl.desktop.patch
 
-BuildRequires:  gstreamer-devel gtk2-devel libxml2-devel intltool
-# curl has been renamed in F-9. New package still provides curl[-devel] but
-# better be safe
-%if 0%{?fedora} >= 9
-BuildRequires:  libcurl-devel
-%else
-BuildRequires:  curl-devel
-%endif
-BuildRequires:  libnotify-devel dbus-glib-devel
+BuildRequires:  pkgconfig(dbus-glib-1)
+BuildRequires:  pkgconfig(gstreamer-0.10)
+BuildRequires:  pkgconfig(gstreamer-interfaces-0.10)
+BuildRequires:  pkgconfig(gtk+-3.0)
+BuildRequires:  pkgconfig(libxml-2.0)
+BuildRequires:  pkgconfig(libcurl)
+BuildRequires:  pkgconfig(libnotify)
+BuildRequires:  pkgconfig(libproxy-1.0)
+BuildRequires:  intltool
 BuildRequires:  desktop-file-utils gettext
 Requires:       hicolor-icon-theme
 Requires:       gstreamer-plugins-ugly
+
 
 %description
 Vagalume is a GTK+-based Last.fm client. Although it works on standard
@@ -50,15 +51,12 @@ Its main features are:
 
 %prep
 %setup -q
+# remove deprecated category
+sed -i 's|;Application;|;|' data/vagalume.desktop.in.in
 
 
 %build
-%if 0%{?fedora} >= 15
-# No support for new libnotify yet
-%configure --disable-tray-icon
-%else
 %configure
-%endif
 make %{?_smp_mflags}
 
 
@@ -66,14 +64,13 @@ make %{?_smp_mflags}
 rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 %find_lang %{name}
-desktop-file-install --vendor="fedora" \
-                     --dir=$RPM_BUILD_ROOT%{_datadir}/applications \
-                     --delete-original \
-  $RPM_BUILD_ROOT%{_datadir}/applications/vagalume.desktop                   
+pushd $RPM_BUILD_ROOT%{_datadir}/applications
+cp -p vagalume{,ctl}.desktop
+cat %{SOURCE1} | patch -p0
+desktop-file-validate vagalume.desktop
+desktop-file-validate vagalumectl.desktop
+popd
 
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %post
 touch --no-create %{_datadir}/icons/hicolor
@@ -101,6 +98,11 @@ fi
 
 
 %changelog
+* Fri Feb  3 2012 Michel Salim <salimma@fedoraproject.org> - 0.8.5-2
+- Switch to building against GTK+ 3.0
+- Enable mixer, notifications, and proxy support
+- Register lastfm:// handler
+
 * Wed Feb  1 2012 Michel Salim <salimma@fedoraproject.org> - 0.8.5-1
 - Update to 0.8.5
 
