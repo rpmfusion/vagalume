@@ -1,13 +1,14 @@
 --- vagalumectl.desktop.orig	2012-02-03 21:28:33.787260712 +0100
 +++ vagalumectl.desktop	2012-02-03 21:29:02.187463104 +0100
-@@ -15,7 +15,9 @@
- Name[pt]=Cliente do Last.fm Vagalume
- Name[pt_BR]=Cliente do Last.fm Vagalume
- Name[ru]=Vagalume Last.fm клиент
--Exec=/usr/bin/vagalume
+@@ -30,8 +30,9 @@
+ X-GNOME-FullName[pt_BR]=Cliente do Last.fm Vagalume
+ X-GNOME-FullName[ru]=Vagalume Last.fm клиент
+ Keywords=Lastfm;Librefm;Music;Player;Radio;Internet;
+-Exec=/usr/bin/vagalume %u
 +Exec=/usr/bin/vagalumectl playurl %u
  Icon=vagalume
-+MimeType=x-scheme-handler/lastfm;
+ MimeType=x-scheme-handler/lastfm;
 +OnlyShowIn=
  X-Icon-path=/usr/share/pixmaps
  X-Window-Icon=vagalume
+

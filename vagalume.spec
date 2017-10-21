@@ -1,26 +1,26 @@
 Name:           vagalume
-Version:        0.8.5
-Release:        7%{?dist}
+Version:        0.8.6
+Release:        1%{?dist}
 Summary:        Last.fm client for GNOME and Maemo
 
 Group:          Applications/Multimedia
 License:        GPLv3
 URL:            http://vagalume.igalia.com/
-Source0:        http://vagalume.igalia.com/files/source/vagalume-%{version}.tar.gz
+Source0:        %url/files/source/vagalume-%{version}.tar.gz
 Source1:        vagalumectl.desktop.patch
 
 BuildRequires:  pkgconfig(dbus-glib-1)
-BuildRequires:  pkgconfig(gstreamer-0.10)
-BuildRequires:  pkgconfig(gstreamer-interfaces-0.10)
+BuildRequires:  pkgconfig(gstreamer-1.0)
 BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(libxml-2.0)
 BuildRequires:  pkgconfig(libcurl)
 BuildRequires:  pkgconfig(libnotify)
 BuildRequires:  pkgconfig(libproxy-1.0)
 BuildRequires:  intltool
-BuildRequires:  desktop-file-utils gettext
+BuildRequires:  desktop-file-utils
+BuildRequires:  gettext
 Requires:       hicolor-icon-theme
-Requires:       gstreamer-plugins-ugly
+Requires:       gstreamer1-plugins-ugly
 
 
 %description
@@ -57,13 +57,12 @@ sed -i 's|;Application;|;|' data/vagalume.desktop.in.in
 
 %build
 %configure
-make %{?_smp_mflags}
+%make_build
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
-make install DESTDIR=$RPM_BUILD_ROOT
-%find_lang %{name}
+%make_install
+
 pushd $RPM_BUILD_ROOT%{_datadir}/applications
 cp -p vagalume{,ctl}.desktop
 cat %{SOURCE1} | patch -p0
@@ -71,35 +70,38 @@ desktop-file-validate vagalume.desktop
 desktop-file-validate vagalumectl.desktop
 popd
 
+%find_lang %{name}
 
 %post
-touch --no-create %{_datadir}/icons/hicolor
-if [ -x %{_bindir}/gtk-update-icon-cache ]; then
-   %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
-fi
-/usr/bin/update-desktop-database &> /dev/null || :
+/bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 
 %postun
-touch --no-create %{_datadir}/icons/hicolor
-if [ -x %{_bindir}/gtk-update-icon-cache ]; then
-   %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
+if [ $1 -eq 0 ] ; then
+    /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null
+    /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 fi
-/usr/bin/update-desktop-database &> /dev/null || :
+
+%posttrans
+/usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %files -f %{name}.lang
-%defattr(-,root,root,-)
-%doc AUTHORS COPYING NEWS README
+%doc AUTHORS NEWS README
+%license COPYING
 %{_bindir}/vagalume*
 %{_datadir}/applications/*.desktop
 %{_datadir}/dbus-1/services/vagalume.service
 %{_datadir}/icons/hicolor/*/apps/vagalume.png
 %{_datadir}/pixmaps/vagalume.*
-%{_datadir}/vagalume
+%{_datadir}/vagalume/
 %{_mandir}/man*/*
 
 
 %changelog
+* Sat Oct 21 2017 Leigh Scott <leigh123linux@googlemail.com> - 0.8.6-1
+- Update to 0.8.6 (rfbz #4373)
+- Clean up spec file
+
 * Thu Aug 31 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 0.8.5-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
 
