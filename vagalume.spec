@@ -1,6 +1,6 @@
 Name:           vagalume
 Version:        0.8.6
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Last.fm client for GNOME and Maemo
 
 Group:          Applications/Multimedia
@@ -98,6 +98,9 @@ fi
 
 
 %changelog
+* Mon Mar 04 2019 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 0.8.6-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
 * Sun Aug 19 2018 Leigh Scott <leigh123linux@googlemail.com> - 0.8.6-4
 - Rebuilt for Fedora 29 Mass Rebuild binutils issue
 
