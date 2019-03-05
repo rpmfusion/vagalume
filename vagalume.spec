@@ -16,6 +16,7 @@ BuildRequires:  pkgconfig(libxml-2.0)
 BuildRequires:  pkgconfig(libcurl)
 BuildRequires:  pkgconfig(libnotify)
 BuildRequires:  pkgconfig(libproxy-1.0)
+BuildRequires:  gcc
 BuildRequires:  intltool
 BuildRequires:  desktop-file-utils
 BuildRequires:  gettext
